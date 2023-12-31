@@ -1,0 +1,196 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+  <title>JavaScript Serialization Example</title>
+  <script src="../js/gserializer.js" type="text/javascript"></script>
+  <script src="../js/tests/tests.js" type="text/javascript"></script>
+  <script type="text/javascript">
+    
+      ////////////////////////////////////////////////////////////////////////////////////
+      // Set and get the cookie values
+      ////////////////////////////////////////////////////////////////////////////////////    
+      function setCookie(c_name,value,expiredays) {
+        var exdate=new Date();
+        exdate.setDate(exdate.getDate()+expiredays);
+        document.cookie=c_name+ "=" +escape(value);
+      } 
+      
+      function getCookie(c_name) {
+        if (document.cookie.length>0) {
+          c_start=document.cookie.indexOf(c_name + "=")
+          if (c_start!=-1) { 
+            c_start=c_start + c_name.length+1 
+            c_end=document.cookie.indexOf(";",c_start)
+            if (c_end==-1) c_end=document.cookie.length
+            return unescape(document.cookie.substring(c_start,c_end))
+          } 
+        }
+        return "";
+      }
+      
+      ////////////////////////////////////////////////////////////////////////////////////
+      // Session Wrapper Object
+      ////////////////////////////////////////////////////////////////////////////////////
+      
+      function Session() {
+        var serializer = new ONEGEEK.GSerializer();
+        var cookieName = 'mint-slice';
+        var object = null;
+      
+        this.startSession = function() {
+          object = retrieveSession();
+          if(object != null) {
+            alert('Retrieved session from cookie \''+cookieName+'\'');
+          }
+          return object;
+        }
+        
+        this.destroySession = function() {
+          setCookie(cookieName,"");  
+          object = null;
+        }   
+        
+        this.getObject = function() {
+          return object;
+        }     
+        
+        retrieveSession = function() {
+          var serializedXML = getCookie(cookieName);
+          if(serializedXML) {
+            var obj = serializer.deserialize(serializedXML);  
+            return obj;          
+          } else {
+            return null;
+          }
+        
+        }
+        this.saveSession = function(obj, objectName) {
+          var containerString = serializer.serialize(obj, objectName);
+          object = obj;
+          setCookie(cookieName,containerString); 
+          alert('session saved')
+          return containerString;        
+        }        
+      }
+
+      ////////////////////////////////////////////////////////////////////////////////////
+      // Start the Session
+      ////////////////////////////////////////////////////////////////////////////////////
+      
+      var session = new Session();
+      var myObject = session.startSession();
+      if(myObject == null) {
+        alert('No previous session, creating a new MyObject and writing to the session');
+        myObject = new MyObject();
+        session.saveSession(myObject,'myObject');
+      }
+
+      /* Get the session object and run the methods */
+      function runDeserializedObjectFunctions() {
+        sessionObject = session.getObject();
+      
+        if(sessionObject != null) {
+          sessionObject.callInternalFunction();
+          sessionObject.addItem("Matt");
+          sessionObject.addItem("Likes");
+          sessionObject.addItem("Serialization");
+          sessionObject.display();
+          sessionObject.displayObjs();
+          sessionObject.getX();
+          sessionObject.displayObj();       
+        } else {
+          alert('object has not been initialised or session has been destroyed');
+        }
+     
+      }
+
+    </script>
+    
+  </head>
+<body>
+
+    <h1>Instructions</h1>
+    <p>
+      When the page first loads, a Session is created and started which checks for the cookie 'mint-slice', containing the serialized MyObject object. If the cookie doesn't exist, a new MyObject is created and written to the session.
+    </p>
+    <ul>
+      <li>Click Save Session to see the serialized XML and write the session to the cookie</li>
+      <li>Click View Session Cookie to see the current serialized object persisted in the cookie</li>
+      <li>Click Destroy Session to kill the MyObject associated with the session and kill the cookie</li>
+      <li>Click Run Object to run the MyObject functions using the deserialized object</li>
+      <li>Click "Refresh Page" after destroying or saving a session to see what happens when the page loads</li>
+      <li>Click clear form to clear the form</li>
+    </ul>
+    <form action="#">
+    <h1>Session</h1>
+    <input type="button" value="Save Session" onclick="document.getElementById('serializedXML').value = session.saveSession(myObject, 'MyObject'); "/>    
+<input type="button" value="View Session Cookie" onclick="alert(getCookie('mint-slice'));"/>
+    <input type="button" value="Destroy Session" onclick="session.destroySession(); document.getElementById('serializedXML').value = ''"/>
+    <input type="button" value="Run Object" onclick="runDeserializedObjectFunctions();"/>
+    <input type="button" value="Refresh page" onclick="location.reload(true);"/>
+    <input type="button" value="Clear form" onclick="reset();"/>
+    <h2>Serialized XML</h2>
+    <textarea id="serializedXML" style="width:500px; height:200px;"></textarea>  
+    <h2>Object Code to be serialized</h2>
+    <div style="width:500px;">
+     <pre>
+     function OtherObject(name) {
+        this.name = name;
+        this.getName = function() {alert(this.name)};
+        this
+      }      
+      
+      function MyObject() {  
+        this.x = 1;
+        this.foo = new Array("boo","foo","fum");
+        this.obj = new OtherObject('Matt\'s other ojbect');
+        this.objArray = new Array(new OtherObject('foo object 1'), new OtherObject('foo object 2'), new OtherObject('foo object 3'));
+        this.objArray = new Array(new OtherObject('footy'));
+        var cool = "cool";
+        this.callInternalFunction = function() {
+          internalFunction();
+        }
+        internalFunction = function() {
+          alert('Calling an internal function and display encapsulated var cool: '+cool);
+        }
+      }
+      
+      MyObject.prototype.addItem = function(item) {
+        this.foo[this.foo.length] = item;
+      }
+      
+      MyObject.prototype.display = function() {
+        for(var i = 0; i < this.foo.length; i++) {
+          alert(this.foo[i]);
+        }
+      }
+
+      MyObject.prototype.displayObjs = function() {
+        for(var i = 0; i < this.objArray.length; i++) {
+          this.objArray[i].getName();
+        }
+      }
+      
+      MyObject.prototype.getX = function() {
+        alert(this.x);
+      }
+      
+      MyObject.prototype.displayObj = function() {
+        this.obj.getName();
+      }
+      
+      var myObject = new MyObject(); 
+      </pre>   
+    </div>      
+    </form>
+    <script src="http://www.google-analytics.com/urchin.js" type="text/javascript"></script>
+	<script type="text/javascript">
+    if (window.location.toString().indexOf('onegeek.com.au') > -1) {
+		_uacct = "UA-1274481-1";
+		urchinTracker();
+    }
+	</script>
+    
+  </body>
+
+</html>

@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "outDir": "./built",
+    "allowJs": true,
+    "sourceMap": true,
+    "lib": [ "dom", "es6" ],
+    "experimentalDecorators": true
+  },
+  "include": [
+    "./src/**/*.js",
+    "./src/**/*.ts", "../../../../BirikimCore.Business/Abstract/ServiceManager/OnlineMutabakat/IOnlineMutabakatYanitService.cs", "../../../../BirikimCore.Entities/ComplexTypes/DepoStokMiktarViewModel.cs", "../../../../BirikimCore.Business/Concrete/Repository/SrbRepository.cs", "../../../../BirikimCore.Business/Concrete/ServiceManager/CRM/CrmGorusmeServiceManager.cs", "../../../../BirikimCore.Entities/ComplexTypes/TedarikciPortal/TedarikciSevkEvrak.cs", "../../../../BirikimCore.Business/Abstract/ServiceManager/Entegrasyon/IEntegrasyonAyarlariService.cs", "../../../../BirikimCore.Business/Concrete/ServiceManager/Entegrasyon/EntegrasyonAyarlariServiceManager.cs", "../../../../BirikimCore.Business/Abstract/ServiceManager/Raporlar/ISatisMaliyetBolgeveTemsilciService.cs", "../../../../BirikimCore.Business/Abstract/ServiceManager/Raporlar/ISatisMaliyetRaporuDetayService.cs", "../../../../BirikimCore.Entities/ComplexTypes/SiparisOnay/SiparisOnay.cs", "../../../../BirikimCore.Entities/ComplexTypes/Wms/BoyutKartForSelectBoxModel.cs", "../../../../BirikimCore.Entities/Enums/YurticiKargoTip.cs", "../../../../BirikimCore.Entities/ComplexTypes/Entegrasyon/YurticiKargo/InvDocFieldVO.cs", "../../../../BirikimCore.Entities/ComplexTypes/Wms/WmsIrsaliyeInsertModel.cs", "../../../../BirikimCore.Business/Abstract/ServiceManager/Birikim/IBIRIKIMService.cs", "../../../../BirikimCore.Entities/ComplexTypes/DohlerWMS/DohlerTerminalIRSMalzeme.cs", "../../../../BirikimCore.Business/Concrete/ServiceManager/DohlerWMS/BirikimServiceManager.cs", "../../../../BirikimCore.Entities/Concrete/Birikim/TerminalFinishGorevInsertModel.cs", "../../../../BirikimCore.Business/Abstract/ServiceManager/WMS/IiadePlanlamaService.cs", "../../../../BirikimCore.Entities/ComplexTypes/Raporlar/RaporMecburListDetay.cs", "../../../../BirikimCore.Entities/ComplexTypes/Onaylama/TechnoIKUcretOnayModel.cs", "../../../../BirikimCore.Entities/ComplexTypes/Onaylama/TechnoIKUcretOnayDetayModel.cs", "../../../../BirikimCore.Business/Abstract/ServiceManager/WMS/ITeminatsizBayiService.cs"
+  ]
+}

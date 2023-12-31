@@ -1,0 +1,99 @@
+{
+  "_args": [
+    [
+      "jquery-ajax-unobtrusive@^3.2.6",
+      "D:\\Tunc\\BirikimCore\\BirikimCore.Presentation.BirikimMVCWebApp"
+    ]
+  ],
+  "_from": "jquery-ajax-unobtrusive@>=3.2.6-0 <4.0.0-0",
+  "_hasShrinkwrap": false,
+  "_id": "jquery-ajax-unobtrusive@3.2.6",
+  "_inCache": true,
+  "_integrity": "",
+  "_location": "/jquery-ajax-unobtrusive",
+  "_nodeVersion": "8.11.4",
+  "_npmOperationalInternal": {
+    "host": "s3://npm-registry-packages",
+    "tmp": "tmp/jquery-ajax-unobtrusive_3.2.6_1538774731941_0.44312350737811745"
+  },
+  "_npmUser": {
+    "email": "npmaspnet@microsoft.com",
+    "name": "npmaspnet"
+  },
+  "_npmVersion": "6.4.1",
+  "_phantomChildren": {},
+  "_requested": {
+    "name": "jquery-ajax-unobtrusive",
+    "raw": "jquery-ajax-unobtrusive@^3.2.6",
+    "rawSpec": "^3.2.6",
+    "scope": null,
+    "spec": ">=3.2.6-0 <4.0.0-0",
+    "type": "range"
+  },
+  "_requiredBy": [
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/jquery-ajax-unobtrusive/-/jquery-ajax-unobtrusive-3.2.6.tgz",
+  "_shasum": "65bd140963011239b2eb679163f079428dea2278",
+  "_shrinkwrap": null,
+  "_spec": "jquery-ajax-unobtrusive@^3.2.6",
+  "_where": "D:\\Tunc\\BirikimCore\\BirikimCore.Presentation.BirikimMVCWebApp",
+  "author": {
+    "name": "Microsoft"
+  },
+  "bugs": {
+    "url": "https://github.com/aspnet/jquery-ajax-unobtrusive/issues"
+  },
+  "dependencies": {
+    "jquery": ">=1.8"
+  },
+  "description": "Add-on to jQuery Ajax to enable unobtrusive options in data-* attributes",
+  "devDependencies": {
+    "gulp": "^4.0.0",
+    "gulp-cli": "1.2.2",
+    "gulp-line-ending-corrector": "1.0.1",
+    "gulp-rename": "1.2.2",
+    "gulp-replace": "0.5.4",
+    "gulp-uglify": "2.0.0"
+  },
+  "directories": {},
+  "dist": {
+    "fileCount": 5,
+    "integrity": "sha512-95pv3c2Fo94qqzI3nBYFhcnwYlz673jutDa5yvADHv9KnWqQOoE8kZVV+nBASSBZF75XnGBl4EfPzOWFw2i9wQ==",
+    "npm-signature": "-----BEGIN PGP SIGNATURE-----\r\nVersion: OpenPGP.js v3.0.4\r\nComment: https://openpgpjs.org\r\n\r\nwsFcBAEBCAAQBQJbt9bMCRA9TVsSAnZWagAAyqgQAIurXnLT8MOHuEVCT03f\ndtyc0eHnq0Gapm5ZUExPbui0YUuYl6r1wzyTCVf4EH7PhxmAPXJC3bm/boiJ\n3k6DppBQ3Q/r0nRALX0FP/OmR1zX6fD2n4P7TAhWHnz64rj+hozur2eRBYb2\n6VrBEA4/gfdCrquzy9YP3bnMJdklLzf4k8dej+v2iJKDq0SXR5y89AG/eNUL\nR3/TNW2GsKLcR9MFDwqIf7Jg9EGjSt+L8/C7frthgKre7vHMnWuqxDN/Kyh9\nAjqgwV7hcrWj0qJS6jGF45G0Z23u+5BBwU5iG53jFm1HPxQ98nFKFTGu/BLy\ntd1ttE8TBwJCY5NFYtCbF7qi0naVR+mpuk1qhNFqwLlF/wb+8Be6EUhXFgVh\nVl5w5KrDInGZYIDuWdRAC4G4rSNhE1pHDdzTIqO5t12kG92rJwWLceEKPblZ\nM9spCi+nMDW6bbUXcmqxVZ/2nJpQN4n3gwT8FfHhLkPNOoaFPLNZqicFPSnP\nDJPmh1GrsvkglA2XrgX8oSaCkYOZdtNesAH5GDqK8QIJcZJ3a1rZHrUfsLgC\nLqT3Lc5JF6DvKrpTiq2tRPr1we9fWMzX9fSDIN4/FOt0bOdekXbyoZeFealG\nHuBZXTgj5HXMChxA6XHRtCqjtPxPBKL9ClAwRFBqDTzJzNYtKiw8TTXwnRZm\n1NDL\r\n=L/2j\r\n-----END PGP SIGNATURE-----\r\n",
+    "shasum": "65bd140963011239b2eb679163f079428dea2278",
+    "tarball": "https://registry.npmjs.org/jquery-ajax-unobtrusive/-/jquery-ajax-unobtrusive-3.2.6.tgz",
+    "unpackedSize": 14384
+  },
+  "homepage": "https://github.com/aspnet/jquery-ajax-unobtrusive",
+  "installable": true,
+  "keywords": [
+    "ajax",
+    "asp.net",
+    "jquery",
+    "mvc",
+    "unobtrusive"
+  ],
+  "license": "https://aka.ms/jquery-ajax-license",
+  "main": "dist/jquery.unobtrusive-ajax.js",
+  "maintainers": [
+    {
+      "email": "kiranchalla@hotmail.com",
+      "name": "kichalla"
+    },
+    {
+      "email": "npmaspnet@microsoft.com",
+      "name": "npmaspnet"
+    }
+  ],
+  "name": "jquery-ajax-unobtrusive",
+  "optionalDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aspnet/jquery-ajax-unobtrusive.git"
+  },
+  "scripts": {
+    "build": "npm install && gulp"
+  },
+  "version": "3.2.6"
+}

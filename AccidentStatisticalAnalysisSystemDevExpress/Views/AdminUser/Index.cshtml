@@ -1,0 +1,39 @@
+﻿@{
+    ViewData["Title"] = "miadaT-Admin";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+
+<div class="m-grid__item m-grid__item--fluid m-wrapper">
+    <div class="m-subheader "><div class="d-flex align-items-center"><div class="mr-auto"><h3 class="m-subheader__title m-subheader__title--separator">Üyeler</h3><ul class="m-subheader__breadcrumbs m-nav m-nav--inline"><li class="m-nav__item m-nav__item--home"><a href="/" class="m-nav__link m-nav__link--icon"><i class="m-nav__link-icon la la-home"></i></a></li><li class="m-nav__separator">-</li><li class="m-nav__item"><a href="" class="m-nav__link"></a></li><li class="m-nav__separator">-</li><li class="m-nav__item"><a href="" class="m-nav__link"><span class="m-nav__link-text">Üyeler</span></a></li></ul></div></div></div>
+
+    <div class="m-content" id="contentPage">
+
+        <div class="m-portlet" m-portlet="true" id="m_portlet_tools_3">
+            <div class="m-portlet__head">
+                <div class="m-portlet__head-caption">
+                    <div class="m-portlet__head-title">
+                        <span class="m-portlet__head-icon">
+                            <i class="flaticon-list"></i>
+                        </span>
+                        <h3 class="m-portlet__head-text">
+                            Üyeler
+                        </h3>
+                    </div>
+                </div>
+                <div class="m-portlet__head-tools">
+                    <ul class="m-portlet__nav">
+                        <li class="m-portlet__nav-item"></li>
+                        <li class="m-portlet__nav-item">
+                            <a href="#" m-portlet-tool="fullscreen" class="m-portlet__nav-link m-portlet__nav-link--icon" title="Genişlet/Daralt"><i class="la la-expand"></i></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div id="gridBlock" class="m-portlet__body">
+                <div id="gridDiv"> </div>
+            </div>
+        </div>
+
+<script src="~/page/adminuserindex.js"></script>
