@@ -16,11 +16,154 @@ function sendRequest(url, method, param) {
     });
     return d.promise();
 }
-$(document).ready(function () {
+$(document).ready(function ()
+{
+    $("#m_portlet_tools_3").show();
+    $("#m_portlet_uyeekle").hide();
+    
     Listele2();
+    $("#PhoneNumber").on("input", function () {
+        var phoneNumber1 = document.getElementById('PhoneNumber');
+        var numericPattern = /^[0-9]+$/;
+
+        var phoneNumber = phoneNumber1.value.replace(/\D/g, '');
+        if (phoneNumber.length > 0) {
+            var formattedPhoneNumber = '(' + phoneNumber.substring(0, 3) + ') ' +
+                phoneNumber.substring(3, 6) + '-' +
+                phoneNumber.substring(6, 10);
+            phoneNumber1.value = formattedPhoneNumber;
+        }
+        var phoneNumber2 = phoneNumber1.value.replace('(', '').replace(')', '').replace('-', '').replace(' ', '');
+        if (!numericPattern.test(phoneNumber2)) {
+            document.getElementById('phone-error-message').textContent = 'Telefon numarası sadece rakamlardan oluşmalıdır.';
+            return;
+        } else {
+            document.getElementById('phone-error-message').textContent = '';
+        }
+    })
+    $("#Password").on("input", function () {
+        var passwordPattern = /^(?=.*?[A-ZÖÜİŞĞÇ])(?=.*?[a-zöüığşç])(?=.*?[0-9])(?=.*?[^a-zA-Z0-9ÖöÜüŞşıİĞğÇç]).{8,}$/;
+        var password = document.getElementById("Password").value;
+        if (!passwordPattern.test(password)) {
+            document.getElementById('password-error-message').textContent = 'Şifre büyük harf,küçük harf,sayi ve özel karakter içermeli ve 8 karakter olmalıdır.';
+        } else {
+            document.getElementById('password-error-message').textContent = '';
+        }
+    })
+    $("#RepeatPassword").on("input", function () {
+        var password = document.getElementById("Password").value;
+        var repeatpassword = document.getElementById("RepeatPassword").value;
+        if (repeatpassword !== password) {
+            document.getElementById('password-error-message2').textContent = 'Şifreler uyuşmuyor.';
+        } else {
+            document.getElementById('password-error-message2').textContent = '';
+        }
+    })
+    $("#EMail").on("input", function () {
+        var emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+        var eMail = document.getElementById('EMail');
+        var email = eMail.value.trim();
+        var formattedEmail = email.toLowerCase();
+
+
+        if (!emailPattern.test(formattedEmail)) {
+            document.getElementById('email-error-message').textContent = 'Geçersiz e-posta adresi!';
+        } else {
+            document.getElementById('email-error-message').textContent = '';
+        }
+    })
 });
+function Kaydet()
+{
+    var name = document.getElementById("Name").value;
+    var sureName = document.getElementById("SureName").value;
+    var username = document.getElementById("UserName").value;
+    var password = document.getElementById("Password").value;
+    var phoneNumber = document.getElementById("PhoneNumber").value;
+    var roleId = document.getElementById("roleId").value;
+    var IsDeleted = document.getElementById("isDeleted").value;
+    var phoneNumber2 = phoneNumber.replace('(', '').replace(')', '').replace('-', '').replace(' ', '');
+
+    var numericPattern = /^[0-9]+$/;
+    var passwordPattern = /^(?=.*?[A-ZÖÜİŞĞÇ])(?=.*?[a-zöüığşç])(?=.*?[0-9])(?=.*?[^a-zA-Z0-9ÖöÜüŞşıİĞğÇç]).{8,}$/;
+    var emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    if (!numericPattern.test(phoneNumber2)) {
+        alert = 'Telefon numarası sadece rakamlardan oluşmalıdır.';
+    }
+    var eMail = document.getElementById("EMail").value;
+
+    var numericPattern = /^[0-9]+$/;
+
+    var passwordPattern = /^(?=.*?[A-ZÖÜİŞĞÇ])(?=.*?[a-zöüığşç])(?=.*?[0-9])(?=.*?[^a-zA-Z0-9ÖöÜüŞşıİĞğÇç]).{8,}$/;
+
+    if (!passwordPattern.test(password)) {
+        alert = 'Şifre büyük harf,küçük harf,sayi ve özel karakter içermeli ve en 8 karakter olmalıdır.';
+    }
+    var email = eMail.trim();
+    var formattedEmail = email.toLowerCase();
+    var emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
+    if (!emailPattern.test(formattedEmail)) {
+        emailInput.value = formattedEmail;
+        alert = 'Geçersiz e-posta adresi!';
+    }
+    var repeatpassword = document.getElementById("RepeatPassword").value;
+    if (repeatpassword == !password) {
+        emailInput.value = formattedEmail;
+        alert = 'Şifreler uyuşmuyor.';
+    }
+    var registerModel = {
+        UserName: username,
+        Password: password,
+        Name: name,
+        SureName: sureName,
+        PhoneNumber: phoneNumber2,
+        EMail: eMail,
+        RoleId: roleId,
+        IsDeleted: IsDeleted
+    };
+        $.ajax
+        (
+            {
+
+                url: "/Admin/Register",
+
+                type: "POST",
+
+                data: JSON.stringify(registerModel),
+
+                contentType: "application/json; charset=utf-8",
+
+                dataType: "json",
+
+                success: function (token)
+
+                {
+                window.location.href = "/Home";
+
+                },
+
+                error: function (response)
+
+                {
+                console.log(response);
+                if (response.status === 400)
+                {
+                    alert(response.responseText);
+                }
+                if (response.status === 500)
+                {
+                    alert("Sunucuya Bağlanamadı.");
+                }
+                }
+
+
+            }
+        );
+};
 
 function Listele2() {
+
     mApp.block('#gridBlock',
         {
             overlayColor: "#000000",
@@ -30,6 +173,7 @@ function Listele2() {
         });
     sendRequest("/AdminUser/GetAll", "GET").then(
         (result) => {
+            console.log(result);
             table.option('dataSource', result);
             table.refresh();
             mApp.unblock('#gridBlock')
@@ -103,6 +247,7 @@ $(function () {
                             stylingMode: "outlined",
                             onClick: function ()
                             {
+                                YeniUyeEkle()
                             }
                         }
                     },
@@ -196,5 +341,30 @@ $(function () {
         }
     ).dxDataGrid("instance");
 });
+function YeniUyeEkle() {
+    $("#m_portlet_uyeekle").show();
+    $("#m_portlet_tools_3").hide();
+}
+function Geri() {
+    $("#m_portlet_uyeekle").hide();
+    $("#m_portlet_tools_3").show();
+    $("#Name").val('');
+    $("#SureName").val('');
+    $("#Password").val('');
+    $("#PasswordRepeat").val('');
+    $("#PhoneNumber").val('');
+    $("#roleId").val('');
+    $("#isDeleted").val('');
+}
+function Temizle()
+{
+    $("#Name").val('');
+    $("#SureName").val('');
+    $("#Password").val('');
+    $("#PasswordRepeat").val('');
+    $("#PhoneNumber").val('');
+    $("#roleId").val('');
+    $("#isDeleted").val('');
+}
 
 

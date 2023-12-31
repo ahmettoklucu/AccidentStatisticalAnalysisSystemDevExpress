@@ -69,16 +69,15 @@ namespace AccidentStatisticalAnalysisSystemDevExpress.Controllers
             string cookieValue = HttpContext.Request.Cookies[cookieName];
             cookieValue = cookieValue.Replace("\\", "");
             cookieValue = cookieValue.Replace("\"", "");
-            var client = _httpClientFactory.CreateClient();
-            var jsonData = JsonConvert.SerializeObject(new { Token = cookieValue });
             var client1 = _httpClientFactory.CreateClient();
             client1.DefaultRequestHeaders.Add("Authorization", $"Bearer {cookieValue}");
             var response1 = await client1.GetAsync("http://localhost:5056/api/User/GetAll");
             if (response1.IsSuccessStatusCode)
             {
                 var jsonResponse1 = await response1.Content.ReadAsStringAsync();
-                var regex1 = Regex.Replace(jsonResponse1, "\"\"", "\"");
-                var result = JsonConvert.DeserializeObject<JArray>(regex1);
+                List<GetAllUserResponse> result = JsonConvert.DeserializeObject<List<GetAllUserResponse>>(jsonResponse1);
+                
+ 
                 return Json(result);
             }
             else

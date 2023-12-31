@@ -5,7 +5,7 @@
 
 
 
-<div class="m-grid__item m-grid__item--fluid m-wrapper">
+<div class="m-grid__item m-grid__item--fluid m-wrapper" >
     <div class="m-subheader "><div class="d-flex align-items-center"><div class="mr-auto"><h3 class="m-subheader__title m-subheader__title--separator">Üyeler</h3><ul class="m-subheader__breadcrumbs m-nav m-nav--inline"><li class="m-nav__item m-nav__item--home"><a href="/" class="m-nav__link m-nav__link--icon"><i class="m-nav__link-icon la la-home"></i></a></li><li class="m-nav__separator">-</li><li class="m-nav__item"><a href="" class="m-nav__link"></a></li><li class="m-nav__separator">-</li><li class="m-nav__item"><a href="" class="m-nav__link"><span class="m-nav__link-text">Üyeler</span></a></li></ul></div></div></div>
 
     <div class="m-content" id="contentPage">
@@ -35,5 +35,138 @@
                 <div id="gridDiv"> </div>
             </div>
         </div>
+        <div class="m-portlet m-portlet--last m-portlet--head-lg m-portlet--responsive-mobile" m-portlet="true" id="m_portlet_uyeekle">
+            <div class="m-portlet__head ">
+                <div class="m-portlet__head-progress">
+                </div>
+                <div class="m-portlet__head-wrapper">
+                    <div class="m-portlet__head-caption">
+                        <div class="m-portlet__head-title">
+                            <span class="m-portlet__head-icon">
+                                <i class="flaticon-information"></i>
+                            </span>
+                            <h3 class="m-portlet__head-text">
+                                Bilgiler
+                            </h3>
+                        </div>
+                    </div>
+                    <div class="m-portlet__head-tools">
+                        <button type="button" onclick="Geri()" class="btn btn-secondary m-btn m-btn--icon m-btn--wide m-btn--md m--margin-right-10">
+                            <span>
+                                <i class="la la-arrow-left"></i>
+                                <span>Geri</span>
+                            </span>
+                        </button>
+                        <button type="button" onclick="Kaydet()" class="btn btn-success m-btn m-btn--icon m-btn--wide m-btn--md m--margin-right-10 text-white guncelle ekle">
+                            <span>
+                                <i class="la la-save"></i>
+                                <span>Kaydet</span>
+                            </span>
+                        </button>
+                        <button type="button" onclick="Temizle()" class="btn btn-info m-btn m-btn--icon m-btn--wide m-btn--md m--margin-right-10 text-white">
+                            <span>
+                                <i class="la la-file"></i>
+                                <span>Temizle</span>
+                            </span>
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+            <div class="m-portlet__body">
+                <div class="m-form m-form--fit m-form--label-align-right">
+                    <div class="m-accordion m-accordion--default col-md-12" id="m_accordion_1" role="tablist">
+                        <div class="m-accordion__item">
+                            <div class="m-accordion__item-head collapsed" role="tab" id="m_accordion_1_item_1_head" data-toggle="collapse" href="#m_accordion_1_item_1_body" aria-expanded="false">
+                                <span class="m-accordion__item-title">Üye Bilgileri</span>
+                                <span class="m-accordion__item-mode"></span>
+                            </div>
+                            <div class="m-accordion__item-body collapse" id="m_accordion_1_item_1_body" role="tabpanel" aria-labelledby="m_accordion_1_item_1_head" data-parent="#m_accordion_1">
+                                <form id="forvalid">
+                                    <div class="m-accordion__item-content row">
+                                        <div class="col-md-6 col-sm-12">
+                                            <div class="m-form__heading">
+                                                <h5 class="m-form__heading-title">Satış Bilgileri</h5>
+                                            </div>
+                                            <div class="form-group-sm m-form__group row">
+                                                <label class="col-lg-3 col-sm-3 col-form-label col-form-label-sm m--font-danger">Yetki:</label>
+                                                <div class="col-lg-9">
+                                                    <div class="input-group input-group-sm">
+                                                        <select data-live-search="true" data-size="4" onchange="RoleChange()" required id="roleId" class="form-control m-select2 selectpicker">
+                                                            <option value="">Seçiniz</option>
+                                                            <option value="1">Admin</option>
+                                                            <option value="2">Kullanıcı</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <label class="col-lg-3 col-sm-3 col-form-label col-form-label-sm m--font-danger">İsim:</label>
+                                                <div class="col-lg-9">
+                                                    <div class="input-group input-group-sm">
+                                                        <input class="form-control m-input hasMaxLength" type="text" required id="name" maxlength="16">
+                                                    </div>
+                                                </div>
+                                                <label class="col-lg-3 col-sm-3 col-form-label col-form-label-sm m--font-danger">Soyisim:</label>
+                                                <div class="col-lg-9">
+                                                    <div class="input-group input-group-sm">
+                                                        <input class="form-control m-input hasMaxLength" type="text" required id="surename" maxlength="16">
+                                                    </div>
+                                                </div>
+                                                <label class="col-lg-3 col-sm-3 col-form-label col-form-label-sm m--font-danger">Telefon numarasi:</label>
+                                                <div class="col-lg-9">
+                                                    <div class="input-group input-group-sm">
+                                                        <input class="form-control m-input hasMaxLength" type="text" required id="PhoneNumber" maxlength="16">
+                                                    </div>
+                                                    <span id="phone-error-message" style="color: red;"></span>
+                                                </div>
+                                                
+                                                <label class="col-lg-3 col-sm-3 col-form-label col-form-label-sm m--font-danger">Parola:</label>
+                                                <div class="col-lg-9">
+                                                    <div class="input-group input-group-sm">
+                                                        <input class="form-control m-input hasMaxLength" type="password" required id="Password" maxlength="16">
+                                                    </div>
+                                                    <span id="password-error-message" style="color: red;"></span>
+                                                </div>
+                                               
+                                                <label class="col-lg-3 col-sm-3 col-form-label col-form-label-sm m--font-danger">Parola Tekrar:</label>
+                                                <div class="col-lg-9">
+                                                    <div class="input-group input-group-sm">
+                                                        <input class="form-control m-input hasMaxLength" type="password" required id="passwordrepeat" maxlength="16">
+                                                    </div>
+                                                    <span id="password-error-message2" style="color: red;"></span>
+                                                </div>
+                                                
+                                                <label class="col-lg-3 col-sm-3 col-form-label col-form-label-sm m--font-danger">EMail:</label>
+                                                <div class="col-lg-9">
+                                                    <div class="input-group input-group-sm">
+                                                        <input class="form-control m-input hasMaxLength" type="text" required id="email" maxlength="16">
+                                                    </div>
+                                                    <span id="email-error-message" style="color: red;"></span>
+                                                </div>
+                                                <label class="col-lg-3 col-sm-3 col-form-label col-form-label-sm m--font-danger">Aktif:</label>
+                                                <div class="col-lg-9">
+                                                    <div class="input-group input-group-sm">
+                                                        <select data-live-search="true" data-size="4" onchange="IsDeletedChange()" required id="İsDeleted" class="form-control m-select2 selectpicker">
+                                                            <option value="">Seçiniz</option>
+                                                            <option value="1">AKTİF</option>
+                                                            <option value="0">PASİF</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <input id="submit-hidden" type="submit" style="display: none" />
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+</div>
+        
+
 
 <script src="~/page/adminuserindex.js"></script>

@@ -57,6 +57,7 @@ $(document).ready(function () {
         var password = document.getElementById("Password").value;
         var phoneNumber = document.getElementById("PhoneNumber").value;
         var phoneNumber2 = phoneNumber.replace('(', '').replace(')', '').replace('-', '').replace(' ', '');
+
         var numericPattern = /^[0-9]+$/;
         var passwordPattern = /^(?=.*?[A-ZÖÜİŞĞÇ])(?=.*?[a-zöüığşç])(?=.*?[0-9])(?=.*?[^a-zA-Z0-9ÖöÜüŞşıİĞğÇç]).{8,}$/;
         var emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
