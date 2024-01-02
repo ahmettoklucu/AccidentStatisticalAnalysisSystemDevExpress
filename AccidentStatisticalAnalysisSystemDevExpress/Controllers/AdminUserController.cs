@@ -85,6 +85,30 @@ namespace AccidentStatisticalAnalysisSystemDevExpress.Controllers
                 return Json(null);
             }
         }
+        public async Task<JsonResult> Get(string guid)
+        {
+
+            string cookieName = "JWTToken";
+            string cookieValue = HttpContext.Request.Cookies[cookieName];
+            cookieValue = cookieValue.Replace("\\", "");
+            cookieValue = cookieValue.Replace("\"", "");
+            var client1 = _httpClientFactory.CreateClient();
+            client1.DefaultRequestHeaders.Add("Authorization", $"Bearer {cookieValue}");
+            string url = "http://localhost:5056/api/User/Get?guid=" + guid;
+            var response1 = await client1.GetAsync(url);
+            if (response1.IsSuccessStatusCode)
+            {
+                var jsonResponse1 = await response1.Content.ReadAsStringAsync();
+                UserResponseModel result = JsonConvert.DeserializeObject<UserResponseModel>(jsonResponse1);
+
+
+                return Json(result);
+            }
+            else
+            {
+                return Json(null);
+            }
+        }
       
 
     }

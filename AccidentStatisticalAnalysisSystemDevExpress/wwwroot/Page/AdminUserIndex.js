@@ -20,6 +20,7 @@ $(document).ready(function ()
 {
     $("#m_portlet_tools_3").show();
     $("#m_portlet_uyeekle").hide();
+    $("#m_portlet_uyeguncelle").hide();
     
     Listele2();
     $("#PhoneNumber").on("input", function () {
@@ -52,7 +53,7 @@ $(document).ready(function ()
     })
     $("#RepeatPassword").on("input", function () {
         var password = document.getElementById("Password").value;
-        var repeatpassword = document.getElementById("RepeatPassword").value;
+        var repeatpassword = document.getElementById("passwordrepeat").value;
         if (repeatpassword !== password) {
             document.getElementById('password-error-message2').textContent = 'Şifreler uyuşmuyor.';
         } else {
@@ -125,39 +126,27 @@ function Kaydet()
         $.ajax
         (
             {
-
                 url: "/Admin/Register",
-
                 type: "POST",
-
                 data: JSON.stringify(registerModel),
-
                 contentType: "application/json; charset=utf-8",
-
                 dataType: "json",
-
                 success: function (token)
-
                 {
                 window.location.href = "/Home";
-
                 },
-
                 error: function (response)
-
                 {
-                console.log(response);
-                if (response.status === 400)
-                {
-                    alert(response.responseText);
+                    console.log(response);
+                    if (response.status === 400)
+                    {
+                        alert(response.responseText);
+                    }
+                    if (response.status === 500)
+                    {
+                        alert("Sunucuya Bağlanamadı.");
+                    }
                 }
-                if (response.status === 500)
-                {
-                    alert("Sunucuya Bağlanamadı.");
-                }
-                }
-
-
             }
         );
 };
@@ -298,7 +287,7 @@ $(function () {
                         cssClass: 'toolBtnGrid',
                         allowHeaderFiltering: false,
                         cellTemplate: function (container, options) {
-                            $('<a href="javascript:;" class="btn btn-outline-success m-btn m-btn--icon btn-sm m-btn--icon-only m-btn--pill m-btn--air" onclick="OnayReddet(\'' + options.data.Id + '\')"><i class="la la-check"></i></a>').appendTo(container);
+                            $('<a href="javascript:;" class="btn btn-outline-success m-btn m-btn--icon btn-sm m-btn--icon-only m-btn--pill m-btn--air" onclick="UyeUpdate(\'' + options.data.Id + '\')"><i class="la la-check"></i></a>').appendTo(container);
                             $('<a style="margin-left:5px;" href="javascript:;" class="btn btn-outline-danger m-btn m-btn--icon btn-sm m-btn--icon-only m-btn--pill m-btn--air" onclick="OnayReddet(\'' + options.data.Id +'\')"><i class="la la-close"></i></a>').appendTo(container);
                             $('<a style="margin-left:5px;" href="javascript:;" class="btn btn-outline-warning m-btn m-btn--icon btn-sm m-btn--icon-only m-btn--pill m-btn--air"  onclick = "PrintRow(\'' + options.data.Id + '\')"><i class="la la-file"></i></a>').appendTo(container);
 
@@ -344,8 +333,10 @@ $(function () {
 function YeniUyeEkle() {
     $("#m_portlet_uyeekle").show();
     $("#m_portlet_tools_3").hide();
+    $("#m_portlet_uyeguncelle").hide();
 }
 function Geri() {
+    $("#m_portlet_uyeguncelle").hide();
     $("#m_portlet_uyeekle").hide();
     $("#m_portlet_tools_3").show();
     $("#Name").val('');
@@ -360,11 +351,41 @@ function Temizle()
 {
     $("#Name").val('');
     $("#SureName").val('');
+    $("#UserName").val('');
     $("#Password").val('');
     $("#PasswordRepeat").val('');
     $("#PhoneNumber").val('');
     $("#roleId").val('');
     $("#isDeleted").val('');
+}
+
+function UyeUpdate(key)
+{
+    $("#m_portlet_uyeguncelle").show();
+    $("#m_portlet_uyeekle").hide();
+    $("#m_portlet_tools_3").hide();
+    mApp.block('body', {});
+    sendRequest('/AdminUser/Get', 'GET', { guid: key }).done(function (result)
+    {
+        console.log(result);
+        $("#UId").val(result.Id);
+        $("#UName").val(result.Name);
+        $("#USureName").val(result.SureName);
+        $("#UUserName").val(result.UserName);
+        $("#UPhoneNumber").val(result.PhoneNumber);
+        $("#URoleId").val(result.RoleId);
+        $("#UEmail").val(result.EMail);
+        if (result.IsDelete === false) {
+            $("#UIsDeleted").val("false")
+        }
+        else {
+            $("#UIsDeleted").val("true")
+        }
+        mApp.unblock('body');
+        $("#URoleId").selectpicker('refresh');
+        $("#UIsDeleted").selectpicker('refresh');
+    })
+
 }
 
 
