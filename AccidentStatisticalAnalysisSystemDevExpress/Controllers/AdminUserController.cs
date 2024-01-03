@@ -99,17 +99,54 @@ namespace AccidentStatisticalAnalysisSystemDevExpress.Controllers
             if (response1.IsSuccessStatusCode)
             {
                 var jsonResponse1 = await response1.Content.ReadAsStringAsync();
-                UserResponseModel result = JsonConvert.DeserializeObject<UserResponseModel>(jsonResponse1);
 
-
-                return Json(result);
+                return Json(jsonResponse1);
             }
             else
             {
                 return Json(null);
             }
         }
-      
+        public async Task<JsonResult> Update(UserResponseModel model)
+        {
+            string cookieName = "JWTToken";
+            string cookieValue = HttpContext.Request.Cookies[cookieName];
+            cookieValue = cookieValue.Replace("\\", "");
+            cookieValue = cookieValue.Replace("\"", "");
+            var client1 = _httpClientFactory.CreateClient();
+            client1.DefaultRequestHeaders.Add("Authorization", $"Bearer {cookieValue}");
+            string url = "http://localhost:5056/api/User/Update";
+            var response1 = await client1.PostAsJsonAsync(url, model); // Kod bu şekilde düzeltilmelidir
+            if (response1.IsSuccessStatusCode)
+            {
+                var jsonResponse1 = await response1.Content.ReadAsStringAsync();
+                return Json(jsonResponse1);
+            }
+            else
+            {
+                return Json(null);
+            }
+        }
+        public async Task<JsonResult> Delete(Guid Id)
+        {
+            string cookieName = "JWTToken";
+            string cookieValue = HttpContext.Request.Cookies[cookieName];
+            cookieValue = cookieValue.Replace("\\", "");
+            cookieValue = cookieValue.Replace("\"", "");
+            var client1 = _httpClientFactory.CreateClient();
+            client1.DefaultRequestHeaders.Add("Authorization", $"Bearer {cookieValue}");
+            string url = "http://localhost:5056/api/User/Delete";
+            var response1 = await client1.PostAsJsonAsync(url, Id);
+            if (response1.IsSuccessStatusCode)
+            {
+                var jsonResponse1 = await response1.Content.ReadAsStringAsync();
+                return Json(jsonResponse1);
+            }
+            else
+            {
+                return Json(null);
+            }
+        }
 
     }
 }

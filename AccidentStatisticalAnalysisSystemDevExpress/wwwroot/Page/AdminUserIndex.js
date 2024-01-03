@@ -288,7 +288,7 @@ $(function () {
                         allowHeaderFiltering: false,
                         cellTemplate: function (container, options) {
                             $('<a href="javascript:;" class="btn btn-outline-success m-btn m-btn--icon btn-sm m-btn--icon-only m-btn--pill m-btn--air" onclick="UyeUpdate(\'' + options.data.Id + '\')"><i class="la la-check"></i></a>').appendTo(container);
-                            $('<a style="margin-left:5px;" href="javascript:;" class="btn btn-outline-danger m-btn m-btn--icon btn-sm m-btn--icon-only m-btn--pill m-btn--air" onclick="OnayReddet(\'' + options.data.Id +'\')"><i class="la la-close"></i></a>').appendTo(container);
+                            $('<a style="margin-left:5px;" href="javascript:;" class="btn btn-outline-danger m-btn m-btn--icon btn-sm m-btn--icon-only m-btn--pill m-btn--air" onclick="UyeDelete(\'' + options.data.Id +'\')"><i class="la la-close"></i></a>').appendTo(container);
                             $('<a style="margin-left:5px;" href="javascript:;" class="btn btn-outline-warning m-btn m-btn--icon btn-sm m-btn--icon-only m-btn--pill m-btn--air"  onclick = "PrintRow(\'' + options.data.Id + '\')"><i class="la la-file"></i></a>').appendTo(container);
 
                             return null;
@@ -385,6 +385,78 @@ function UyeUpdate(key)
         $("#URoleId").selectpicker('refresh');
         $("#UIsDeleted").selectpicker('refresh');
     })
+}
+
+var updateModel =
+    {
+    Id: $("#UId").value,
+    Name: $("#UName").value,
+    SureName: $("#USureName").value,
+    UserName: $("#UUserName").value,
+    PhoneNumber: $("#UPhoneNumber").value,
+    RoleId: $("#URoleId").value,
+    EMail: $("#UEmail").value,
+    IsDelete: $("#UIsDeleted").value
+    };
+function Update()
+{
+    $.ajax
+        (
+            {
+                url: "/Admin/Update",
+                type: "POST",
+                data: JSON.stringify(Model),
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function () {
+                    if (response.status === 200) {
+                        alert(response.responseText);
+                    }
+                    window.location.href = "AdminUser/Index";
+                },
+                error: function (response) {
+                    console.log(response);
+                    if (response.status === 400) {
+                        alert(response.responseText);
+                    }
+                    if (response.status === 500) {
+                        alert("Sunucuya Bağlanamadı.");
+                    }
+                }
+            }
+        );
+
+}
+function UyeDelete(Id)
+{
+    $.ajax
+        (
+            {
+                url: "/Admin/Delete",
+                type: "POST",
+                data: JSON.stringify(Id),
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function () {
+                    if (response.status === 200)
+                    {
+                        alert(response.responseText);
+                        Listele2();
+                    }
+                },
+                error: function (response)
+                {
+                    console.log(response);
+                    if (response.status === 400) {
+                        alert(response.responseText);
+                    }
+                    if (response.status === 500) {
+                        alert("Sunucuya Bağlanamadı.");
+                    }
+
+                }
+            }
+        );
 
 }
 
